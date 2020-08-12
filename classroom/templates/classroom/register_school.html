@@ -1,0 +1,59 @@
+{% extends 'classroom/home.html'%}
+{% load static %}
+{% block content %}
+<center>
+<div class="form-field" id="left" > 
+
+    <h2 style="display:flex;">School Registration</h2><br>
+    <hr>
+    <form id="form" method="POST" action="{% url 's_register' %}">
+        {% csrf_token %}
+        <div class="form-field">
+            <input class="form-control" type="text" name="s_name" placeholder="School Name" required>
+        </div>
+        <div class="form-field">
+            <input class="form-control" type="text" name="s_addrs" placeholder="Adrress Line 1" required>
+        </div>
+        <div class="form-field">
+            <input class="form-control" type="text" name="s_city" placeholder="City" required>
+        </div>
+        <div class="form-field">
+            <input class="form-control" type="text" name="s_state" placeholder="State" required>
+        </div>
+        <div class="form-field">
+            <input class="form-control" type="text" pattern="[789][0-9]{9}" name="s_contct" placeholder="Contact Number" required>
+        </div><hr>
+        <div class="form-field">
+            <input class="form-control" type="email" name="s_mail" placeholder="Office mail and Admin Username" required>
+        </div>
+        <div class="form-field">
+            <input id="psw" class="form-control" type="password" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" name="psw" placeholder="Password for Admin" required><br>
+        </div>
+        <hr>
+            <input id="form-button" class="login-btn btn-success " type="submit"  onclick="validatePassword" value="Register here"><br><br>
+            <p> <a href="{% url 'a_login' %}" style="color: black;">Already Registered ? Sign In here</a></p>
+        
+        </form>
+</div>
+</center>
+<script>
+function validatePassword() {
+  var p = document.getElementById('newPassword').value,
+      errors = [];
+  if (p.length < 8) {
+      errors.push("Your password must be at least 8 characters");
+  }
+  if (p.search(/[a-z]/i) < 0) {
+      errors.push("Your password must contain at least one letter."); 
+  }
+  if (p.search(/[0-9]/) < 0) {
+      errors.push("Your password must contain at least one digit.");
+  }
+  if (errors.length > 0) {
+      alert(errors.join("\n"));
+      return false;
+  }
+  return true;
+}
+</script>
+{% endblock content %}

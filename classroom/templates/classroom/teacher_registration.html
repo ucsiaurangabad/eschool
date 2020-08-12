@@ -1,0 +1,38 @@
+{% extends 'classroom/a_dash.html' %}
+{% load static %}
+{% block content %}
+<center>
+<div class="form-field" id="left" > 
+
+    <h2 style="display:flex;">Teacher Registration</h2><br>
+    <hr>
+    <form id="form" method="POST" action="{% url 't_register' %}">
+        {% csrf_token %}
+        <div class="form-field">
+            <input class="form-control" type="text" name="t_fname" placeholder="First Name" required>
+        </div>
+        <div class="form-field">
+            <input class="form-control" type="text" name="t_lname" placeholder="Last Name" required>
+        </div>
+        <div class="form-field">
+            <input class="form-control" type="text" pattern="[789][0-9]{9}" name="t_contct" placeholder="Contact Number" required>
+        </div><hr>
+        <div class="form-field">
+            <input class="form-control" type="email" name="t_mail" placeholder="Email which will be Username" required>
+        </div>
+        <div class="form-field">
+            <input id="psw" class="form-control" type="password" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" name="psw" placeholder="Password" required><br>
+        </div>
+        <hr>
+        <p style="color: #FF0000;">{{error}}
+            {{form.non_field_errors}}
+        </p>
+        <hr>
+            <input id="form-button" class="login-btn btn-success " type="submit"  onclick="validatePassword" value="Register here"><br><br>
+            <p> <a href="{% url 't_login' %}" style="color: black;">Already Registered ? Sign In here</a></p>
+        
+        </form>
+</div>
+</center>
+
+{% endblock content %}

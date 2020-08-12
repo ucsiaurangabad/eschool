@@ -1,0 +1,31 @@
+{% extends 'classroom/home.html'%}
+{% load static %}
+{% block content %}
+<center>
+<div class="form-field">
+
+    <h2>Admin Login</h2><br>
+    <hr>
+    <form id="form" method="POST" action="{% url 'a_login' %}">
+        {% csrf_token %}
+        <div class="form-field">
+            <input class="form-control" type="text" name="s_id" placeholder="School ID" required>
+        </div>
+        <div class="form-field">
+            <input class="form-control" type="text" name="username" placeholder="Username" required>
+        </div>
+        <div class="form-field">
+            <input class="form-control" type="password" name="password" placeholder="Password" required>
+        </div>
+        <hr>
+        <p style="color: #FF0000;">{{error}}
+            {{form.non_field_errors}}
+        </p>
+        <hr>
+            <input id="form-button" class="login-btn btn-success " type="submit" value="Sign In"><br><br>
+            <p> <a href="{% url 'home' %}" style="color: black;">Forgot Password ?</a></p>
+            <p> <a href="{% url 's_register' %}" style="color: black;">Register school here</a></p>
+        </form>
+</div>
+</center>
+{% endblock content %}
